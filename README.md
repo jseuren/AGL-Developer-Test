@@ -2,8 +2,8 @@
 Attn: Robert Rath, Senior Consultant - Digital, Applications &amp; Development, Robert Walters
 
 ## Assumptions for usage
-Node.JS installed and running
-Favorite GIT command line tool installed
+- Node.JS installed and running
+- Favorite GIT command line tool installed
 
 ## How To Use
 ```bash
@@ -31,6 +31,6 @@ Libraries used for the test
 
 ## Assumptions for test
 
-There should be at least one owner with a cat
-All owners should be assigned a gender
-All cats defined should have a name
+- There should be at least one owner with a cat
+- All owners should be assigned a gender
+- All cats defined should have a name
