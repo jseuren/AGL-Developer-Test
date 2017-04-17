@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+     <meta charset="utf-8">
+     <title>AGL Developer Test By John Seuren</title>
+     <meta name="description" content="AGl Developer test as defined at http://agl-developer-test.azurewebsites.net/ provided by Robert Rath from Robert Walter Agency.">
+     <meta name="author" content="John Seuren">
+</head>
+<body>
+
+    <div id="testData">
+        <div id="output">Loading Cat Owners List...</div>
+    </div>
+
+<a href="/test/testcode.html" target="_blank">View test results</a>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="/node_modules/underscore/underscore-min.js"></script>
+<script>
+    var agltest = agltest || {};
+</script>
+<script src="/src/dataService.js"></script>   
+<script>
+    (function () {
+        agltest.dataService.init();
+    }());
+</script> 
+
+</body>
+</html>
