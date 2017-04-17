@@ -4,9 +4,7 @@
     "author": "John Seuren",
     "description": "Packgaes required for simple stand alone server to develop the test",
     "scripts": {
-        "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
-        "tsc": "tsc",
-        "tsc:w": "tsc -w",
+        "start": "lite-server",
         "lite": "lite-server",
         "test": "qunit"
     },
