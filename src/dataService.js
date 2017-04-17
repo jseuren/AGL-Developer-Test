@@ -16,41 +16,37 @@ agltest.dataService = (function () {
 
     function getOwnersWithCats(people) {
 
-        return  _.filter(people, function (owner) {
-
-                if (owner.pets){
-
-                    //if there are any cats then return true as these are the owners we are intested in
-                    if (_.contains(owner.pets), function (pet) {
-
-                        return pet.type.toLowerCase() === 'cat';
-
-                    }) {
-                        return true;
-                    }
+        return _.filter(people, function (owner) {
+            if (owner.pets) {
+                //if there are any cats then return true as these are the owners we are intested in
+                if (_.findIndex(owner.pets, function (pet) {
+                    return pet.type.toLowerCase() === 'cat';
+                }) >= 0) {
+                    return true;
                 }
+            }
 
-                return false;
-            });
+            return false;
+        });
     }
 
-    function getCatNamesForGenders (ownersWithCats) {
+    function getCatNamesForGenders(ownersWithCats) {
 
-         var genders = _.groupBy(ownersWithCats, 'gender');
+        var genders = _.groupBy(ownersWithCats, 'gender');
 
-         return _.map(genders, function (gender) {
-                return {
-                    gender: gender[0].gender,
-                    cats: _.sortBy(
-                            _.filter(
-                                _.flatten(
-                                    _.pluck(gender, 'pets')), 
-                                function (pet) {
-                                    return pet.type.toLowerCase() === 'cat';
-                                }), 
-                            'name')
-                };
-            });
+        return _.map(genders, function (gender) {
+            return {
+                gender: gender[0].gender,
+                cats: _.sortBy(
+                    _.filter(
+                        _.flatten(
+                            _.pluck(gender, 'pets')),
+                        function (pet) {
+                            return pet.type.toLowerCase() === 'cat';
+                        }),
+                    'name')
+            };
+        });
 
     }
 
@@ -71,20 +67,20 @@ agltest.dataService = (function () {
             $.ajax({
                 url: '/src/templates/cats.handlebars',
                 cache: true,
-                success: function(data) {
-                    var template  = data;
-                     //use handlebars to easily generate
+                success: function (data) {
+                    var template = data;
+                    //use handlebars to easily generate
                     _.each(mappedData, function (element) {
 
                         htmlOutput += renderCatsForGender(element, template);
-                      
+
                     });
 
                     //render output to screen
                     $output.replaceWith(htmlOutput);
-                }               
-            });    
-           
+                }
+            });
+
 
         } else {
 
@@ -95,13 +91,13 @@ agltest.dataService = (function () {
     }
 
     var initialize = function () {
-        
+
         $.ajax({
             url: 'http://agl-developer-test.azurewebsites.net/people.json',
             //as it is not on local domain need to use jsonp
             dataType: 'jsonp',
             success: function (response) {
-                
+
                 outputCatListByGender(response);
 
             },
@@ -113,7 +109,7 @@ agltest.dataService = (function () {
             }
         });
     };
-    
+
 
     return {
         init: initialize,

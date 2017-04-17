@@ -32,5 +32,5 @@ Libraries used for the test
 ## Assumptions for test
 
 - There should be at least one owner with a cat
-- All owners should be assigned a gender
+- All cat owners should be assigned a gender
 - All cats defined should have a name

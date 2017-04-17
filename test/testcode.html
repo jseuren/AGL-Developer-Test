@@ -20,8 +20,7 @@
     <script src="/node_modules/qunitjs/qunit/qunit.js"></script>
     <script src="/test/sample.js"></script>
     <script>
-
-        QUnit.module("JQuery")
+        QUnit.module("JQuery");
         //test for main Jquery object
         QUnit.test("test for JQuery", function (assert) {
             var value = $;
@@ -43,25 +42,48 @@
         });
 
         //sample data is from sample.js
-        //not testing integration just the validaty of the data
+        //not testing integration of data, just the validaty of the data
         var people = sampleData;
+        var ownersWithCats = [];
+        QUnit.module("AGL Test Data Manipulation",
+            {
+                before : function () {
 
-        QUnit.module("AGL Test Data Manipulation");
+                    ownersWithCats = agltest.dataService.getOwnersWithCats(people);
 
-        QUnit.test('test manipulation of data from test JSON file', function (assert) {
+                }
+                // prepare something once for all tests
+            });
 
-            var ownersWithCats = agltest.dataService.getOwnersWithCats(people);
+
+        QUnit.test('There is at least one owner with a cat', function (assert) {
+
             assert.ok(ownersWithCats && ownersWithCats.length, 'There is at least one owner with a cat');
 
-            var ownersWithoutGender = _.find(ownersWithCats, function (person) {
+        });
 
-                return !person.gender;
+        QUnit.test('All cat owners have a gender defined', function (assert) {
+         
+            var ownerWithoutGender = _.find(ownersWithCats, function (person) {
+             
+                return !person.gender && !person.gender.length;
 
             });
-            assert.ok(!ownersWithoutGender || !ownersWithoutGender.length, 'All people have a gender defined');
+         
+            assert.ok(!ownerWithoutGender);
+        });
+
+        QUnit.test('A Gender has at least one cat with a name', function (assert) {
 
             var catNamesByGender = agltest.dataService.getCatNamesForGenders(ownersWithCats);
-            assert.ok(catNamesByGender && catNamesByGender.length, 'There is at least one mapped cat name to a gender');
+
+            assert.ok(catNamesByGender && catNamesByGender.length);
+
+        });
+
+        QUnit.test('All Cat owners have names for their cat/s', function (assert) {
+
+            var catNamesByGender = agltest.dataService.getCatNamesForGenders(ownersWithCats);
 
             var catNames = _.flatten(_.pluck(catNamesByGender, 'cats'), true);
 
