@@ -3,6 +3,7 @@ Attn: Robert Rath, Senior Consultant - Digital, Applications &amp; Development, 
 
 ## Assumptions for usage
 Node.JS installed and running
+Favorite GIT command line tool installed
 
 ## How To Use
 ```bash
