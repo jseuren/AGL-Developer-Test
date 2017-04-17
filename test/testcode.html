@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>QUnit Testing Results</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.3.1.css">
+</head>
+
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+    <script src="/node_modules/underscore/underscore-min.js"></script>
+    <script>
+        var agltest = agltest || {};
+    </script>
+    <script src="/src/dataService.js"></script>
+    <script src="/node_modules/qunitjs/qunit/qunit.js"></script>
+    <script src="/test/sample.js"></script>
+    <script>
+
+        QUnit.module("JQuery")
+        //test for main Jquery object
+        QUnit.test("test for JQuery", function (assert) {
+            var value = $;
+            assert.ok(value !== !undefined, "JQuery is present");
+        });
+
+        QUnit.module("Handlebars")
+        //test for main Handlebars object
+        QUnit.test("test for Handlebars", function (assert) {
+            var value = Handlebars;
+            assert.ok(value !== !undefined, "Handlebars is present");
+        });
+
+        QUnit.module("UnderscoreJS")
+        //test for main Handlebars object
+        QUnit.test("test for Underscore JS", function (assert) {
+            var value = Handlebars;
+            assert.ok(value !== !undefined, "Handlebars is present");
+        });
+
+        //sample data is from sample.js
+        //not testing integration just the validaty of the data
+        var people = sampleData;
+
+        QUnit.module("AGL Test Data Manipulation");
+
+        QUnit.test('test manipulation of data from test JSON file', function (assert) {
+
+            var ownersWithCats = agltest.dataService.getOwnersWithCats(people);
+            assert.ok(ownersWithCats && ownersWithCats.length, 'There is at least one owner with a cat');
+
+            var ownersWithoutGender = _.find(ownersWithCats, function (person) {
+
+                return !person.gender;
+
+            });
+            assert.ok(!ownersWithoutGender || !ownersWithoutGender.length, 'All people have a gender defined');
+
+            var catNamesByGender = agltest.dataService.getCatNamesForGenders(ownersWithCats);
+            assert.ok(catNamesByGender && catNamesByGender.length, 'There is at least one mapped cat name to a gender');
+
+            var catNames = _.flatten(_.pluck(catNamesByGender, 'cats'), true);
+
+            var noNames = _.some(catNames, function (cat) {
+                return !cat.name || !cat.name.length;
+            });
+            assert.ok(!noNames, 'All Cat owners have names for their cat/s');
+
+        });
+    </script>
+</body>
+
+</html>

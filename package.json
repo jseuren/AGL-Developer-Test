@@ -1,0 +1,26 @@
+{
+    "name": "agl-developer-test",
+    "version": "1.0.0",
+    "author": "John Seuren",
+    "description": "Packgaes required for simple stand alone server to develop the test",
+    "scripts": {
+        "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
+        "tsc": "tsc",
+        "tsc:w": "tsc -w",
+        "lite": "lite-server",
+        "test": "qunit"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "concurrently": "^2.2.0",
+        "lite-server": "^2.2.0",
+        "jquery": "^3.2.0",
+        "handlebars": "^4.0.0",
+        "underscore": "^1.8.0",
+        "qunitjs": "^2.3.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/jseuren/AGL-Developer-Test.git"
+    }
+}
